@@ -4,7 +4,7 @@
 asdfkjalsdfkjasdf
 
 
-[avatar](ccc/6ad9452292.jpg)
+![avatar](ccc/6ad9452292.jpg)
 
 
 
