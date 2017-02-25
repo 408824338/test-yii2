@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'memo')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'pid')->widget('common\widgets\upload\FileInput') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
