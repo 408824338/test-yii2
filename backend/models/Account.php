@@ -56,6 +56,7 @@ class Account extends \yii\db\ActiveRecord
                     return date('U');
                 }, // unix timestamp  
             ],
+            'myBehavior2' => MyBehavior::className(),
            
             
         ];

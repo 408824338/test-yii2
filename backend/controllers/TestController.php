@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\behaviors\MyBehavior;
 use Yii;
 use backend\models\Test;
 use backend\models\TestSearch;
+use yii\base\Component;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,6 +22,8 @@ class TestController extends Controller
     public function behaviors()
     {
         return [
+            MyBehavior::className(),
+            'myBehavior2'=>MyBehavior::className(),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -42,6 +46,15 @@ class TestController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionBehavior1(){
+        //静态调用行为myBehavior2
+        $behvior =yii\base\Component::getBehavior('myBehavior2');
+        echo $behvior->property1;
+        echo $behvior->method1();
+
+        exit;
     }
 
     /**

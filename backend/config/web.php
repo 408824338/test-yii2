@@ -72,6 +72,9 @@ $config = [
         ],
        * 
        */
+      'car'=>[
+          'class'=>'backend\controllers\Car',
+      ],
     ],
     /*  设置动态主题
     'as theme' =>[
