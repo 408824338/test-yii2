@@ -75,7 +75,7 @@ function env($key, $default = false) {
     return $value;
 }
 
-//´òÓ¡Êä³ö
+//æ‰“å°è¾“å‡º
 function pt($data, $is_die = true) {
     echo "<pre>";
     print_r($data);
@@ -84,7 +84,7 @@ function pt($data, $is_die = true) {
     }
 }
 
-//´òÓ¡Êä³ö
+//æ‰“å°è¾“å‡º
 function dp($data, $is_die = true) {
     echo "<pre>";
     var_dump($data);
@@ -94,29 +94,29 @@ function dp($data, $is_die = true) {
 }
 
 /**
- *  ×Ö·û´®½ØÈ¡£¬µ¥×Ö½Ú½ØÈ¡Ä£Ê½
+ *  å­—ç¬¦ä¸²æˆªå–ï¼Œå•å­—èŠ‚æˆªå–æ¨¡å¼
  *
- * @param     string		$str  ĞèÒª½ØÈ¡µÄ×Ö·û´®
- * @param     int			$length  ½ØÈ¡µÄ³¤¶È
- * @param     int			$start  ¿ªÊ¼½ØÈ¡µÄÎ»ÖÃ
- * @param     boole			$omission  ÊÇ·ñÒªÔÚºóÃæ¼ÓÉÏÊ¡ÂÔºÅ£¬ false:²»¼Ó  true:¼Ó
+ * @param     string		$str  éœ€è¦æˆªå–çš„å­—ç¬¦ä¸²
+ * @param     int			$length  æˆªå–çš„é•¿åº¦
+ * @param     int			$start  å¼€å§‹æˆªå–çš„ä½ç½®
+ * @param     boole			$omission  æ˜¯å¦è¦åœ¨åé¢åŠ ä¸Šçœç•¥å·ï¼Œ false:ä¸åŠ   true:åŠ 
  * @return    string
  */
 function cn_substr_utf8($str, $length, $start = 0, $omission = false) {
-    //ÅĞ¶Ï±äÁ¿ÊÇ·ñÎª¿Õ
+    //åˆ¤æ–­å˜é‡æ˜¯å¦ä¸ºç©º
     if (strlen($str) < $start + 1) {
         return '';
     }
     preg_match_all("/./su", $str, $ar);
     $str = '';
     $tstr = '';
-    //ÎªÁË¼æÈİmysql4.1ÒÔÏÂ°æ±¾,ÓëÊı¾İ¿âvarcharÒ»ÖÂ,ÕâÀïÊ¹ÓÃ°´×Ö½Ú½ØÈ¡
+    //ä¸ºäº†å…¼å®¹mysql4.1ä»¥ä¸‹ç‰ˆæœ¬,ä¸æ•°æ®åº“varcharä¸€è‡´,è¿™é‡Œä½¿ç”¨æŒ‰å­—èŠ‚æˆªå–
     for ($i = 0; isset($ar[0][$i]); $i++) {
-        //ÕâÀïÊÇ°ÑÆğÊ¼Î»ÖÃÖ®Ç°µÄ×Ö¶Î¹ıÂËµô
+        //è¿™é‡Œæ˜¯æŠŠèµ·å§‹ä½ç½®ä¹‹å‰çš„å­—æ®µè¿‡æ»¤æ‰
         if (strlen($tstr) < $start) {
             $tstr .= $ar[0][$i];
         } else {
-            //strlen($ar[0][$i] Èç¹ûÊÇÖĞÎÄ¾Í3¸ö×Ö·û£¬Èç¹ûÊÇ±ğµÄ¾Í1¸ö×Ö·û
+            //strlen($ar[0][$i] å¦‚æœæ˜¯ä¸­æ–‡å°±3ä¸ªå­—ç¬¦ï¼Œå¦‚æœæ˜¯åˆ«çš„å°±1ä¸ªå­—ç¬¦
             if (strlen($str) <= $length && $length - strlen($str) >= strlen($ar[0][$i])) {
                 $str .= $ar[0][$i];
             } else {
@@ -131,10 +131,10 @@ function cn_substr_utf8($str, $length, $start = 0, $omission = false) {
 }
 
 /**
- *  ÓÃÓÚÉú³ÉËæ»úµÄÊı×ÖºÍ×ÖÄ¸×éºÏ
- * @Param $len Éú³É³¤¶È
- * @Param $is_strtoupper   ÊÇ·ñ×ª»»³É´óĞ´
- * @Param $chars   			     ×Ô¶¨ÒåËæ»ú×Ö·û´®
+ *  ç”¨äºç”Ÿæˆéšæœºçš„æ•°å­—å’Œå­—æ¯ç»„åˆ
+ * @Param $len ç”Ÿæˆé•¿åº¦
+ * @Param $is_strtoupper   æ˜¯å¦è½¬æ¢æˆå¤§å†™
+ * @Param $chars   			     è‡ªå®šä¹‰éšæœºå­—ç¬¦ä¸²
  * @Return string
  */
 function randStr($len, $is_strtoupper = false, $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
@@ -152,7 +152,7 @@ function randStr($len, $is_strtoupper = false, $chars = '0123456789abcdefghijklm
 
 
 /**
- * Ëæ»úÊı×ÖÊı×Ö
+ * éšæœºæ•°å­—æ•°å­—
  * @param type $num
  * @return string
  * @author  cmk
@@ -162,12 +162,12 @@ function getRangNUm($num) {
     while (count($arr) < $num - 1) {
         $arr[] = rand(1, $num);
         $arr = array_unique($arr);
-        
+
     }
     return  implode("",$arr);;
 }
 
-//°ÑÊı×é(¿É¶àÎ¬)ÖĞÖµnull×ªÎª ''
+//æŠŠæ•°ç»„(å¯å¤šç»´)ä¸­å€¼nullè½¬ä¸º ''
 function convert_null_to_empty(&$arrdata){
     if (empty($arrdata)) {
         return '';
@@ -187,11 +187,11 @@ function convert_null_to_empty(&$arrdata){
 
 
 /**
- * ÓĞĞ§ÆÚ
- * @param unknown $end_time   ¶©µ¥½áÊøÊ±¼ä
+ * æœ‰æ•ˆæœŸ
+ * @param unknown $end_time   è®¢å•ç»“æŸæ—¶é—´
  * @return number
  */
- function timedifforder($end_time){
+function timedifforder($end_time){
     $beg_time = time();
     $timediff = $end_time- $beg_time;
     if($timediff <= 0){
@@ -201,7 +201,7 @@ function convert_null_to_empty(&$arrdata){
     return $days;
 }
 
-//ÑéÖ¤ÊÖ»úºÅÂë
+//éªŒè¯æ‰‹æœºå·ç 
 function is_mobile($mobile) {
     $pattern = '/^1(?:3[0-9]|4[0-9]|5[0-9]|8[0-9]|7[0678])\d{8}$/';
     $is_mobile = (bool) preg_match($pattern, $mobile);
@@ -209,18 +209,18 @@ function is_mobile($mobile) {
 }
 
 /**
- * µ¼³öexcel·â×°·½·¨
- * @param $title      ±í¸ñÃû³Æ
- * @param $headNames  ±í¸ñÍ·²¿ÁĞÃû³Æ
- * @param $data       ±í¸ñÊı¾İ£¨¶şÎ¬Êı×é£©
- * @param $mode       1:ä¯ÀÀÆ÷Êä³öÄ£Ê½    2£ºÎÄ¼ş±£´æµ«²»Êä³öÄ£Ê½
- * @param $path       ÎÄ¼şÃû³Æ  °üº¬£ºÎÄ¼ş±£´æµÄÂ·¾¶£¬±ØĞëÊÇ¾ø¶ÔÂ·¾¶     ÀıÈç£º    d:\myword\index.html   ¸ñÊ½
+ * å¯¼å‡ºexcelå°è£…æ–¹æ³•
+ * @param $title      è¡¨æ ¼åç§°
+ * @param $headNames  è¡¨æ ¼å¤´éƒ¨åˆ—åç§°
+ * @param $data       è¡¨æ ¼æ•°æ®ï¼ˆäºŒç»´æ•°ç»„ï¼‰
+ * @param $mode       1:æµè§ˆå™¨è¾“å‡ºæ¨¡å¼    2ï¼šæ–‡ä»¶ä¿å­˜ä½†ä¸è¾“å‡ºæ¨¡å¼
+ * @param $path       æ–‡ä»¶åç§°  åŒ…å«ï¼šæ–‡ä»¶ä¿å­˜çš„è·¯å¾„ï¼Œå¿…é¡»æ˜¯ç»å¯¹è·¯å¾„     ä¾‹å¦‚ï¼š    d:\myword\index.html   æ ¼å¼
  */
 function exportExcel($title,$headNames,$data,$mode=1,$path=''){
     $maxColumn = array('A','B','C','D','E','F','G','H','I','J','K','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
     $objPHPExcel = new \PHPExcel();
-    $objSheet=$objPHPExcel->getActiveSheet();//»ñÈ¡µ±Ç°»î¶¯sheet
-    $objSheet->setTitle($title);//¸øµ±Ç°»î¶¯sheetÆğ¸öÃû³Æ
+    $objSheet=$objPHPExcel->getActiveSheet();//è·å–å½“å‰æ´»åŠ¨sheet
+    $objSheet->setTitle($title);//ç»™å½“å‰æ´»åŠ¨sheetèµ·ä¸ªåç§°
     $headStyle = array();
     $columnSizes =  array();
 
@@ -255,10 +255,10 @@ function exportExcel($title,$headNames,$data,$mode=1,$path=''){
 
         $j++;
     }
-    $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');//Éú³ÉexcelÎÄ¼ş
-    
+    $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');//ç”Ÿæˆexcelæ–‡ä»¶
+
     if ($mode == 1) {
-        browser_export('Excel5',$title.'.xls');//Êä³öµ½ä¯ÀÀÆ÷
+        browser_export('Excel5',$title.'.xls');//è¾“å‡ºåˆ°æµè§ˆå™¨
         $objWriter->save('php://output');
     } elseif ($mode == 2) {
         if (!file_exists(dirname($path))) {
@@ -270,12 +270,12 @@ function exportExcel($title,$headNames,$data,$mode=1,$path=''){
 
 function browser_export($type,$filename){
     if($type=="Excel5"){
-        header('Content-Type: application/vnd.ms-excel');//¸æËßä¯ÀÀÆ÷½«ÒªÊä³öexcel03ÎÄ¼ş
+        header('Content-Type: application/vnd.ms-excel');//å‘Šè¯‰æµè§ˆå™¨å°†è¦è¾“å‡ºexcel03æ–‡ä»¶
     }else{
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');//¸æËßä¯ÀÀÆ÷Êı¾İexcel07ÎÄ¼ş
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');//å‘Šè¯‰æµè§ˆå™¨æ•°æ®excel07æ–‡ä»¶
     }
-    header('Content-Disposition: attachment;filename="'.$filename.'"');//¸æËßä¯ÀÀÆ÷½«Êä³öÎÄ¼şµÄÃû³Æ
-    header('Cache-Control: max-age=0');//½ûÖ¹»º´æ
+    header('Content-Disposition: attachment;filename="'.$filename.'"');//å‘Šè¯‰æµè§ˆå™¨å°†è¾“å‡ºæ–‡ä»¶çš„åç§°
+    header('Cache-Control: max-age=0');//ç¦æ­¢ç¼“å­˜
 }
 
 
@@ -289,9 +289,9 @@ function get_person_html5_shop_url($company_id, $user_id) {
 
 
 /**
- * @Description Éí·İÖ¤ºÅÑéÖ¤
- * @Param $id_card string Éí·İÖ¤ºÅÂë×Ö·û´®
- * @Return bool TRUE Í¨¹ı  FALSE ²»Í¨¹ı
+ * @Description èº«ä»½è¯å·éªŒè¯
+ * @Param $id_card string èº«ä»½è¯å·ç å­—ç¬¦ä¸²
+ * @Return bool TRUE é€šè¿‡  FALSE ä¸é€šè¿‡
  */
 function validate_id_card($id_card) {
     if(strlen($id_card) == 18) {
@@ -304,12 +304,12 @@ function validate_id_card($id_card) {
     }
 }
 
-// ½«15Î»Éí·İÖ¤Éı¼¶µ½18Î»
+// å°†15ä½èº«ä»½è¯å‡çº§åˆ°18ä½
 function idcard_15to18($idcard){
     if (strlen($idcard) != 15){
         return false;
     }else{
-        // Èç¹ûÉí·İÖ¤Ë³ĞòÂëÊÇ996 997 998 999£¬ÕâĞ©ÊÇÎª°ÙËêÒÔÉÏÀÏÈËµÄÌØÊâ±àÂë
+        // å¦‚æœèº«ä»½è¯é¡ºåºç æ˜¯996 997 998 999ï¼Œè¿™äº›æ˜¯ä¸ºç™¾å²ä»¥ä¸Šè€äººçš„ç‰¹æ®Šç¼–ç 
         if (array_search(substr($idcard, 12, 3), array('996', '997', '998', '999')) !== false){
             $idcard = substr($idcard, 0, 6) . '18'. substr($idcard, 6, 9);
         }else{
@@ -320,7 +320,7 @@ function idcard_15to18($idcard){
     return $idcard;
 }
 
-// 18Î»Éí·İÖ¤Ğ£ÑéÂëÓĞĞ§ĞÔ¼ì²é
+// 18ä½èº«ä»½è¯æ ¡éªŒç æœ‰æ•ˆæ€§æ£€æŸ¥
 function idcard_checksum18($idcard){
     if (strlen($idcard) != 18){ return false; }
     $idcard_base = substr($idcard, 0, 17);
@@ -332,8 +332,8 @@ function idcard_checksum18($idcard){
 }
 
 /**
- * ¼ÆËãÉí·İÖ¤Ğ£ÑéÂë£¬¸ù¾İ¹ú¼Ò±ê×¼GB 11643-1999
- * Ö÷ÒªÓÃÓÚÄÚ²¿µ÷ÓÃ
+ * è®¡ç®—èº«ä»½è¯æ ¡éªŒç ï¼Œæ ¹æ®å›½å®¶æ ‡å‡†GB 11643-1999
+ * ä¸»è¦ç”¨äºå†…éƒ¨è°ƒç”¨
  * @param $idcard_base
  * @return bool | string
  */
@@ -341,9 +341,9 @@ function _idcard_verify_number($idcard_base) {
     if(strlen($idcard_base) != 17) {
         return FALSE;
     }
-    //¼ÓÈ¨Òò×Ó
+    //åŠ æƒå› å­
     $factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-    //Ğ£ÑéÂë¶ÔÓ¦Öµ
+    //æ ¡éªŒç å¯¹åº”å€¼
     $verify_number_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
     $checksum = 0;
     for ($i = 0; $i < strlen($idcard_base); $i++) {

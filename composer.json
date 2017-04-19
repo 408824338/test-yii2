@@ -26,8 +26,17 @@
     "repositories":[
         {
             "type": "git",
+            "url": "https://github.com/ihacklog/yii2-sms-module.git"
+        },
+        {
+            "type": "git",
             "url": "https://github.com/408824338/yii2-event-demo.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/408824338/yii2-rsa.git"
         }
+
     ],
     "require": {
         "php": ">=5.5.0",
@@ -59,7 +68,9 @@
         "jino5577/yii2-date-range-picker": "*",
         "kartik-v/yii2-date-range": "*",
         "iutbay/yii2-imagecache": "*",
-        "horse003/yii2-event-demo": "dev-master"
+        "horse003/yii2-event-demo": "^1.0.2",
+        "ihacklog/yii2-sms-module": "^1.1.3",
+        "ihacklog/yii2-rsa": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "^2.0.0",

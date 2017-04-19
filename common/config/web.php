@@ -12,7 +12,7 @@ $config = [
         'enablePreferredLanguage' => true
     ]
 ];
-
+//dp(YII_DEBUG);
 if (YII_DEBUG) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
