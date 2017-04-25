@@ -4,6 +4,6 @@ return [
     'basePath' => dirname(__DIR__),
     'components' => [
         'urlManager' => require(__DIR__.'/_urlManager.php'),
-        'cache' => require(__DIR__.'/_cache.php'),
+        'frontendCache' => require(Yii::getAlias('@frontend/config/_cache.php'))
     ],
 ];

@@ -56,7 +56,7 @@ $config = [
             }
         ],
         'request' => [
-             'baseUrl' => '/company',
+             'baseUrl' => '',
             'cookieValidationKey' => env('COMPANY_COOKIE_VALIDATION_KEY')
         ],
         'user' => [
