@@ -15,6 +15,7 @@ use yii\filters\VerbFilter;
  */
 class ProcductController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * @inheritdoc
      */
@@ -64,9 +65,10 @@ class ProcductController extends Controller
      */
     public function actionCreate()
     {
+       // echo 'a';exit;
         $model = new Procduct();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            echo 'yes';exit;
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
