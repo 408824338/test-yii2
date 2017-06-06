@@ -67,6 +67,7 @@ $config = [
             'as afterLogin' => 'common\behaviors\LoginTimestampBehavior',
             'identityCookie' => ['name' => '_identity_company', 'httpOnly' => false],
             'idParam' => '__id_company',
+            'authTimeoutParam' => '__expire_company',
         ],
         'shopUser' => [
             'class'=> 'yii\web\User',

@@ -94,7 +94,9 @@ class SignInController extends \yii\web\Controller
             return ActiveForm::validate($model);
         }
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+             //  return $this->redirect('http://www.baidu.com');
+               return $this->redirect('/user/default/index');
+            // return $this->goBack();
         } else {
             return $this->render('login', [
                 'model' => $model
@@ -108,7 +110,8 @@ class SignInController extends \yii\web\Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->goHome();
+        //return $this->goHome();
+        return $this->redirect('/site/index');
     }
 
     /**

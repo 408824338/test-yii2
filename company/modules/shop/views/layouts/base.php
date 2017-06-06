@@ -22,24 +22,24 @@ $this->beginContent('@company/modules/shop/views/layouts/_clear.php')
         'items' => [
             ['label' => Yii::t('frontend', 'Homasdfase'), 'url' => ['/shop/site/index']],
             ['label' => 'shop', 'url' => ['/shop/manage/index']],
-            ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
-            ['label' => Yii::t('frontend', 'Login'), 'url' => ['/shop/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],
+            ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/shop/sign-in/signup'], 'visible'=>Yii::$app->shopUser->isGuest],
+            ['label' => Yii::t('frontend', 'Login'), 'url' => ['/shop/sign-in/login'], 'visible'=>Yii::$app->shopUser->isGuest],
             [
-                'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity(),
-                'visible'=>!Yii::$app->user->isGuest,
+                'label' => Yii::$app->shopUser->isGuest ? '' : Yii::$app->shopUser->identity->getPublicIdentity(),
+                'visible'=>!Yii::$app->shopUser->isGuest,
                 'items'=>[
                     [
                         'label' => Yii::t('frontend', 'Settings'),
-                        'url' => ['/user/default/index']
+                        'url' => ['/shop/default/index']
                     ],
                     [
                         'label' => Yii::t('frontend', 'Backend'),
                         'url' => Yii::getAlias('@backendUrl'),
-                        'visible'=>Yii::$app->user->can('manager')
+                        'visible'=>Yii::$app->shopUser->can('manager')
                     ],
                     [
                         'label' => Yii::t('frontend', 'Logout'),
-                        'url' => ['/user/sign-in/logout'],
+                        'url' => ['/shop/sign-in/logout'],
                         'linkOptions' => ['data-method' => 'post']
                     ]
                 ]

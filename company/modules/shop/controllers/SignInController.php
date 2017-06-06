@@ -63,7 +63,7 @@ class SignInController extends \yii\web\Controller
                         'allow' => false,
                         'roles' => ['@'],
                         'denyCallback' => function () {
-                            return Yii::$app->controller->redirect(['/user/default/index']);
+                            return Yii::$app->controller->redirect(['/shop/default/index']);
                         }
                     ],
                     [
@@ -93,8 +93,8 @@ class SignInController extends \yii\web\Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('manage/index');
+        if ($model->load(Yii::$app->request->post()) && $model->shopLogin()) {
+            return $this->redirect('/shop/default/index');
             //return $this->goBack();
         } else {
             return $this->render('login', [
@@ -108,8 +108,9 @@ class SignInController extends \yii\web\Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
-        return $this->goHome();
+        Yii::$app->shopUser->logout();
+        //return $this->goHome();
+        return $this->redirect('/shop/site/index');
     }
 
     /**
