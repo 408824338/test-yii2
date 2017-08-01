@@ -5,44 +5,9 @@ $config = [
     'defaultRoute' => 'site/index',
     'bootstrap' => ['maintenance'],
     'modules' => [
-        'user' => [
-            'class' => 'rbac\modules\user\Module',
-            //'shouldBeActivated' => true
-        ],
-        'report' => [
-            'class' => 'rbac\modules\report\Module',
-            //'shouldBeActivated' => true
-        ],
-        'api' => [
-            'class' => 'rbac\modules\api\Module',
-            'modules' => [
-                'v1' => 'rbac\modules\api\v1\Module'
-            ]
-        ]
+
     ],
     'components' => [
-        'authClientCollection' => [
-            'class' => 'yii\authclient\Collection',
-            'clients' => [
-                'github' => [
-                    'class' => 'yii\authclient\clients\GitHub',
-                    'clientId' => env('GITHUB_CLIENT_ID'),
-                    'clientSecret' => env('GITHUB_CLIENT_SECRET')
-                ],
-                'facebook' => [
-                    'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => env('FACEBOOK_CLIENT_ID'),
-                    'clientSecret' => env('FACEBOOK_CLIENT_SECRET'),
-                    'scope' => 'email,public_profile',
-                    'attributeNames' => [
-                        'name',
-                        'email',
-                        'first_name',
-                        'last_name',
-                    ]
-                ]
-            ]
-        ],
         'errorHandler' => [
             'errorAction' => 'site/error'
         ],
@@ -57,12 +22,10 @@ $config = [
             'cookieValidationKey' => env('RBAC_COOKIE_VALIDATION_KEY')
         ],
         'user' => [
-            'class'=>'yii\web\User',
-            'identityClass' => 'common\models\User',
-            'loginUrl'=>['/user/sign-in/login'],
+            'identityClass' => 'rbac\models\User',
             'enableAutoLogin' => true,
-            'as afterLogin' => 'common\behaviors\LoginTimestampBehavior'
-        ]
+        ],
+        'db' => require(__DIR__ . '/db.php'),
     ]
 ];
 

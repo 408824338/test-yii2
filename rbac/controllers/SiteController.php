@@ -1,99 +1,126 @@
 <?php
+
 namespace rbac\controllers;
 
+use rbac\controllers\common\BaseController;
 use Yii;
-use frontend\models\ContactForm;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\filters\VerbFilter;
+use rbac\models\LoginForm;
+use rbac\models\ContactForm;
 
-/**
- * Site controller
- */
-class SiteController extends Controller
+class SiteController extends BaseController
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function actions()
     {
         return [
-            'thumb' => 'iutbay\yii2imagecache\ThumbAction',
             'error' => [
-                'class' => 'yii\web\ErrorAction'
+                'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
-            'set-locale'=>[
-                'class'=>'common\actions\SetLocaleAction',
-                'locales'=>array_keys(Yii::$app->params['availableLocales'])
-            ],
-            'test'=>[
-                'class'=>'common\actions\TestAction',
-                'param1'=>'参数1',
-                'param2'=>'参数2',
-                'beforeCallback' => [$this, 'registerSmsBeforeCallback'],
-                'initCallback' => [$this, 'registerSmsInitCallback'],
-            ]
         ];
     }
 
     /**
-     * @author cmk
-     *  第1步  自定义函数  initCallback
-     *  获取表单输入框内容
+     * Displays homepage.
+     *
+     * @return string
      */
-   public function registerSmsInitCallback($action){
-        $action->mobile = '134185112232';
-   }
-
-    /**
-     * @author cmk
-     *  第2步  自定义函数  initCallback
-     *  后端验证规则 是否输入正确
-     * @param $action
-     * @return bool
-     */
-    public function registerSmsBeforeCallback($action){
-
-   }
-
     public function actionIndex()
     {
-
         return $this->render('index');
     }
 
+    /**
+     * Login action.
+     *
+     * @return string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Logout action.
+     *
+     * @return string
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
+
+    /**
+     * Displays contact page.
+     *
+     * @return string
+     */
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->contact(Yii::$app->params['adminEmail'])) {
-                Yii::$app->getSession()->setFlash('alert', [
-                    'body'=>Yii::t('frontend', 'Thank you for contacting us. We will respond to you as soon as possible.'),
-                    'options'=>['class'=>'alert-success']
-                ]);
-                return $this->refresh();
-            } else {
-                Yii::$app->getSession()->setFlash('alert', [
-                    'body'=>\Yii::t('frontend', 'There was an error sending email.'),
-                    'options'=>['class'=>'alert-danger']
-                ]);
-            }
-        }
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
 
+            return $this->refresh();
+        }
         return $this->render('contact', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
-    
- public function actionError()
-{
-     echo 'xxx';exit;
-    $exception = Yii::$app->errorHandler->exception;
-    if ($exception !== null) {
-        return $this->render('error', ['exception' => $exception]);
-    }
-}
 
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionAbout()
+    {
+        return $this->render('about');
+    }
 }

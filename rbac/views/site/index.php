@@ -1,37 +1,24 @@
 <?php
+
 /* @var $this yii\web\View */
-$this->title = Yii::$app->name;
-use yii\bootstrap\Html;
+
+$this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-
-    <?php echo \common\widgets\DbCarousel::widget([
-        'key'=>'index',
-        'options' => [
-            'class' => 'slide', // enables slide effect
-        ],
-    ]) ?>
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
-        <?php echo common\widgets\DbMenu::widget([
-            'key'=>'frontend-index',
-            'options'=>[
-                'tag'=>'p'
-            ]
-        ]) ?>
-
+        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
-
 
     <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Headingxxxxxxxxxxxxx</h2>
+                <h2>Heading</h2>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip

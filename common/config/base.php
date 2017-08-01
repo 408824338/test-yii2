@@ -146,6 +146,11 @@ $config = [
                 'hostInfo' => Yii::getAlias('@companyUrl'),
             ], require(Yii::getAlias('@company/config/_urlManager.php'))
         ),
+        'urlManagerRabc' => \yii\helpers\ArrayHelper::merge(
+            [
+                'hostInfo' => Yii::getAlias('@rbacUrl'),
+            ], require(Yii::getAlias('@rbac/config/_urlManager.php'))
+        ),
         'urlManagerFrontend' => \yii\helpers\ArrayHelper::merge(
             [
                 'hostInfo' => Yii::getAlias('@frontendUrl'),
